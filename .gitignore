@@ -1,0 +1,95 @@
+# =========================================================================
+# SEGURANÇA E VARIÁVEIS DE AMBIENTE (NUNCA COMMITAR)
+# =========================================================================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.pem
+*.key
+
+# =========================================================================
+# AMBIENTES VIRTUAIS PYTHON
+# =========================================================================
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# =========================================================================
+# CACHES E ARQUIVOS COMPILADOS PYTHON
+# =========================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# =========================================================================
+# DEPENDÊNCIAS E BUILDS JAVASCRIPT / NODE / NEXT.JS
+# =========================================================================
+node_modules/
+frontend/node_modules/
+.next/
+frontend/.next/
+out/
+frontend/out/
+.turbo/
+frontend/.turbo/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# =========================================================================
+# CACHES DE MODELOS DE MACHINE LEARNING & EMBEDDINGS (FASTEMBED / HF)
+# =========================================================================
+.cache/
+fastembed_cache/
+*fastembed_cache*
+huggingface/
+
+# =========================================================================
+# SISTEMA OPERACIONAL E EDITORES (IDE)
+# =========================================================================
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+.idea/
+.vscode/
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+
+# =========================================================================
+# LOGS E ARQUIVOS TEMPORÁRIOS
+# =========================================================================
+*.log
+temp/
+tmp/

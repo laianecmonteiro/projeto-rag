@@ -1,0 +1,29 @@
+# =========================================================================
+# DEPENDÊNCIAS DO BACKEND PYTHON - PROJETO RAG LAIANE
+# =========================================================================
+
+# Framework Web e Servidor API
+fastapi>=0.115.0
+uvicorn>=0.30.0
+pydantic>=2.9.0
+
+# Comunicação HTTP e Variáveis de Ambiente
+httpx>=0.28.0
+python-dotenv>=1.0.1
+
+# Banco de Dados & Armazenamento Vetorial Supabase
+supabase>=2.10.0
+postgrest>=2.32.0
+
+# Embeddings Vetoriais Locais (ONNX Runtime)
+fastembed>=0.4.0
+onnxruntime>=1.19.0
+
+# Processamento e Extração de Documentos PDF
+reportlab>=4.2.0
+pdfplumber>=0.11.0
+pypdf>=5.0.0
+
+# Manipulação Tabular e Vetorial
+pandas>=2.2.0
+numpy>=2.0.0

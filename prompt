@@ -1,0 +1,479 @@
+### INSTRUÇÃO (A AÇÃO CENTRAL)
+
+Aja como um **especialista sênior em desenvolvimento web, Python, sistemas RAG e aplicações orientadas a dados**, com foco em boas práticas de arquitetura, segurança, organização de código e clareza didática.
+
+O objetivo principal não é apenas construir o sistema, mas **permitir que o aluno compreenda claramente cada etapa do processo de um sistema RAG**, desde a ingestão dos documentos até a geração da resposta pelo LLM.
+
+Durante a implementação, explique de forma objetiva as decisões técnicas relevantes e mantenha a arquitetura simples o suficiente para fins didáticos, evitando complexidade desnecessária.
+
+---
+
+### CONTEXTO (O CENÁRIO DE FUNDO)
+
+Vou desenvolver um projeto **RAG (Retrieval-Augmented Generation)**.
+
+Os dados de ambiente, tecnologias, stacks, versões e demais informações necessárias para o projeto estão descritos no arquivo:
+
+<dados>
+rag.txt
+</dados>
+
+**Leia e respeite integralmente as informações contidas nesse arquivo antes de iniciar a implementação.**
+
+O projeto é **didático** e tem como finalidade permitir que este aluno compreenda, na prática, as ações realizadas em cada etapa de um processo RAG.
+
+Portanto:
+
+* Não esconda as etapas importantes por meio de abstrações desnecessárias.
+* Priorize código legível e organizado.
+* Mantenha separadas as responsabilidades de frontend, backend, banco de dados e processamento RAG.
+* Não altere a stack definida em `rag.txt` sem justificar e solicitar autorização.
+* Não substitua tecnologias definidas no arquivo por outras apenas por preferência.
+* Sempre que uma decisão técnica for necessária, priorize a solução mais adequada ao objetivo didático.
+
+---
+
+### EXEMPLOS (PADRÃO OURO DE ENTRADA/SAÍDA)
+
+Seja um sistema conforme descrito no arquivo listado em:
+
+<dados>
+rag.txt
+</dados>
+
+O **frontend** deverá seguir boas práticas de desenvolvimento web, possuir uma interface limpa, funcional, responsiva e intuitiva.
+
+O **backend** será responsável pelas regras de negócio, processamento dos documentos, pipeline RAG, comunicação com os serviços externos e acesso ao banco de dados.
+
+O sistema utilizará o **Supabase** como banco de dados.
+
+As credenciais e configurações de acesso aos serviços externos deverão estar no arquivo `.env` e **nunca deverão ser expostas diretamente no código-fonte, frontend, logs ou respostas da API**.
+
+Os componentes deverão possuir responsabilidades bem definidas:
+
+* Frontend → interface e interação com o usuário.
+* Backend → regras de negócio e APIs.
+* Pipeline RAG → ingestão, processamento, chunking, tokenização, embeddings, armazenamento vetorial, retrieval e geração.
+* Supabase/PostgreSQL + PGVector → armazenamento dos dados e vetores.
+* OpenRouter → acesso ao LLM.
+* FastEmbed → geração dos embeddings, conforme definido neste prompt.
+
+---
+
+### TAREFA FINAL (O GATILHO IMEDIATO)
+
+Usando as melhores práticas de desenvolvimento, segurança, arquitetura e organização de código, execute o seguinte:
+
+"""
+
+1. **LEITURA E VALIDAÇÃO DO AMBIENTE**
+
+   Antes de implementar qualquer funcionalidade:
+
+   * Leia o arquivo `rag.txt`.
+   * Identifique a stack definida.
+   * Identifique versões, dependências, estrutura esperada e configurações existentes.
+   * Verifique a estrutura atual do projeto antes de criar novos arquivos.
+   * Não sobrescreva arquivos existentes sem necessidade.
+   * Reutilize configurações e componentes existentes quando fizer sentido.
+
+2. **TESTE DE CONECTIVIDADE COM O SUPABASE**
+
+   Antes de criar o backend completo, faça primeiro um **teste isolado de conectividade com o Supabase**.
+
+   O teste deverá:
+
+   * Utilizar as credenciais presentes no `.env`.
+   * Validar que a aplicação consegue estabelecer comunicação com o Supabase.
+   * Não expor valores de credenciais.
+   * Retornar apenas informações necessárias para confirmar sucesso ou falha da conexão.
+
+   **Somente após uma conexão bem-sucedida com o Supabase deverá prosseguir com a construção do backend.**
+
+   Caso a conexão falhe:
+
+   * Não prossiga silenciosamente.
+   * Informe claramente o erro.
+   * Identifique a etapa que falhou.
+   * Sugira a correção necessária.
+   * Não invente credenciais, URLs ou configurações.
+
+3. **SEGURANÇA DAS CREDENCIAIS**
+
+   Todas as conexões remotas, incluindo **SUPABASE e OPENROUTER**, deverão utilizar as variáveis definidas no `.env`.
+
+   Nunca:
+
+   * coloque chaves diretamente no código;
+   * envie chaves para o frontend;
+   * exiba chaves nos logs;
+   * grave chaves em arquivos públicos;
+   * versione o `.env` no Git.
+
+   Caso seja necessário criar um `.env.example`, utilize apenas nomes das variáveis, sem valores reais.
+
+   Na criação de scripts de conectividade ou testes, **não leia ou exiba o valor das credenciais**. O código deverá apenas acessar/chamar as variáveis necessárias por meio das respectivas chaves/entradas de configuração.
+
+4. **CONSTRUÇÃO DO BACKEND**
+
+   Após validar a conectividade:
+
+   * Construa o backend de acordo com a stack definida em `rag.txt`.
+   * Organize o código por responsabilidades.
+   * Crie endpoints claros para ingestão, consulta e demais operações necessárias.
+   * Valide as entradas recebidas.
+   * Trate erros adequadamente.
+   * Não exponha informações sensíveis nas respostas.
+   * Mantenha a lógica do RAG no backend.
+
+5. **CONSTRUÇÃO DO FRONTEND**
+
+   Construa uma interface web limpa, funcional, responsiva e intuitiva.
+
+   O frontend deverá consumir o backend por meio de API.
+
+   Não deverá acessar diretamente credenciais do Supabase ou do OpenRouter.
+
+   Após o frontend estar funcional, faça a conexão entre frontend e backend e teste o fluxo completo.
+
+6. **VISUALIZAÇÃO DIDÁTICA DO PIPELINE RAG**
+
+   A aplicação deverá exibir dinamicamente as etapas do processo RAG.
+
+   A visualização deverá deixar claro para o aluno **qual etapa está sendo executada e qual foi o resultado daquela etapa**, sempre que tecnicamente possível.
+
+   O processo de INGESTÃO deverá ser apresentado como:
+
+   **INGESTÃO → CHUNKING → TOKENIZAÇÃO → EMBEDDING → ÍNDICE VETORIAL**
+
+   O processo de CONSULTA deverá ser apresentado como:
+
+   **PERGUNTA → TOKENIZAÇÃO → EMBEDDING → RETRIEVAL → PROMPT AUMENTADO → LLM → RESPOSTA**
+
+   Sempre que possível, a interface deverá indicar visualmente:
+
+   * etapa atual;
+   * etapas concluídas;
+   * eventuais erros;
+   * quantidade de chunks;
+   * quantidade de candidatos recuperados;
+   * scores do retrieval.
+
+7. **PÁGINA DE INGESTÃO**
+
+   Crie uma página específica para ingestão de documentos.
+
+   Essa página deverá permitir ao usuário selecionar uma base de dados/conjunto de documentos para ingestão.
+
+   Deverá apresentar visualmente o pipeline:
+
+   **INGESTÃO → CHUNKING → TOKENIZAÇÃO → EMBEDDING → ÍNDICE VETORIAL**
+
+   O usuário deverá conseguir acompanhar o processamento dos documentos.
+
+8. **PÁGINA DE CONSULTA**
+
+   Crie uma página de perguntas com uma experiência semelhante a um chat moderno, inspirada na usabilidade de ferramentas como o ChatGPT, sem copiar sua identidade visual.
+
+   A página deverá possuir:
+
+   * campo para digitar a pergunta;
+   * botão para enviar a pergunta;
+   * seleção da base de dados que será consultada;
+   * área para exibir a resposta;
+   * visualização do processo RAG;
+   * área para exibir os resultados do retrieval.
+
+9. **RETRIEVAL**
+
+   A etapa de retrieval deverá utilizar:
+
+   **top_k = 5**
+
+   A interface deverá apresentar os até 5 candidatos recuperados, juntamente com seus respectivos **scores de similaridade/distância**, conforme a métrica utilizada pelo mecanismo vetorial.
+
+   Sempre deixe claro que os resultados apresentados são os documentos/chunks recuperados pelo mecanismo de busca vetorial.
+
+10. **AUSÊNCIA DE RESULTADOS**
+
+Caso o retrieval não encontre candidatos relevantes ou não existam dados suficientes na base:
+
+**NÃO INVENTE INFORMAÇÕES.**
+
+Nesse caso, a resposta deverá ser exatamente:
+
+**"Sem dados disponíveis na base"**
+
+O LLM não deverá criar uma resposta baseada em conhecimento externo quando não houver contexto recuperado suficiente na base.
+
+11. **DOCUMENTOS DE TESTE**
+
+Crie **4 documentos fictícios em formato PDF** no ambiente de trabalho.
+
+Esses documentos deverão representar **notas fiscais fictícias**, contendo informações estruturadas e variadas para permitir testes reais do pipeline de ingestão e consulta.
+
+Os documentos deverão possuir dados suficientes para realizar perguntas como:
+
+* número da nota;
+* nome do fornecedor;
+* CNPJ fictício;
+* data;
+* produtos/serviços;
+* quantidade;
+* valores;
+* valor total;
+* informações adicionais.
+
+Os documentos são exclusivamente fictícios e não deverão utilizar dados reais de pessoas ou empresas.
+
+12. **OCR E EXTRAÇÃO DE DADOS**
+
+Utilize bibliotecas Python adequadas e eficazes para realizar **OCR nos documentos**, quando necessário.
+
+O objetivo é demonstrar didaticamente o processo de:
+
+**PDF → OCR → texto → extração de campos → estruturação dos dados**
+
+Utilize bibliotecas apropriadas para o tipo de PDF criado.
+
+Os campos relevantes das notas fiscais deverão ser extraídos e estruturados.
+
+Não invente campos que não estejam presentes nos documentos.
+
+13. **ESTRUTURAÇÃO TABULAR**
+
+Após a extração:
+
+* Estruture localmente os dados em formato tabular.
+* Organize os campos de maneira consistente.
+* Faça a limpeza e normalização necessária.
+* Mantenha uma representação clara dos dados extraídos.
+
+Sempre que possível, permita visualizar essa estrutura durante o processo didático.
+
+14. **CHUNKING**
+
+Implemente o processo de chunking de forma explícita.
+
+O aluno deverá conseguir entender:
+
+* qual texto foi extraído;
+* como ele foi dividido;
+* quais chunks foram gerados;
+* como os chunks serão utilizados na etapa de embedding.
+
+Utilize uma estratégia de chunking adequada ao conteúdo dos documentos e à stack definida em `rag.txt`.
+
+15. **TOKENIZAÇÃO**
+
+Aplique a tokenização necessária nas etapas correspondentes do pipeline.
+
+Sempre diferencie conceitualmente:
+
+* tokenização utilizada pelo modelo/embedding;
+* tokenização utilizada pelo LLM.
+
+Não implemente tokenização manual desnecessária caso a biblioteca/modelo já faça esse processamento internamente.
+
+16. **EMBEDDINGS**
+
+Utilize **FastEmbed** para geração dos embeddings.
+
+A implementação deverá usar a versão/modelo compatível com FastEmbed e adequada ao projeto.
+
+Os embeddings deverão ser gerados a partir dos chunks produzidos na etapa anterior.
+
+Mantenha claro no código e na interface que:
+
+**texto/chunk → embedding vetorial**
+
+17. **PGVECTOR E BANCO VETORIAL**
+
+Os dados estruturados localmente deverão ser utilizados para alimentar a estrutura remota no Supabase.
+
+No ambiente remoto:
+
+* Utilize PostgreSQL com **PGVECTOR**.
+* Crie a estrutura necessária para armazenar os embeddings.
+* Armazene os chunks juntamente com os metadados relevantes.
+* Armazene os vetores gerados pelo FastEmbed.
+* Crie o mecanismo necessário para realizar a busca por similaridade.
+
+A dimensão do vetor deverá ser compatível com o modelo de embedding utilizado.
+
+Não utilize uma dimensão arbitrária.
+
+18. **RETRIEVAL VETORIAL**
+
+Na consulta:
+
+**PERGUNTA → EMBEDDING DA PERGUNTA → BUSCA VETORIAL → TOP_K = 5**
+
+O backend deverá realizar a busca no PGVector utilizando o embedding da pergunta.
+
+Retorne os melhores candidatos juntamente com seus scores.
+
+19. **PROMPT AUMENTADO**
+
+Após o retrieval:
+
+* reúna os chunks recuperados;
+* construa o contexto;
+* monte o prompt aumentado;
+* envie o contexto juntamente com a pergunta ao LLM.
+
+O prompt deverá instruir o LLM a responder **somente com base no contexto recuperado**.
+
+Caso o contexto não seja suficiente para responder à pergunta, o LLM deverá retornar:
+
+**"Sem dados disponíveis na base"**
+
+20. **LLM E OPENROUTER**
+
+Utilize o **OpenRouter** para comunicação com o LLM, conforme as configurações existentes no `.env` e definidas em `rag.txt`.
+
+A chave da API deverá permanecer exclusivamente no backend.
+
+Nunca envie a chave do OpenRouter para o frontend.
+
+21. **FLUXO COMPLETO**
+
+Ao final, o sistema deverá permitir executar o seguinte fluxo:
+
+**INGESTÃO**
+
+PDF
+↓
+OCR / Extração
+↓
+Texto
+↓
+Chunking
+↓
+Tokenização
+↓
+FastEmbed
+↓
+Vetores
+↓
+Supabase + PGVector
+↓
+Índice vetorial
+
+**CONSULTA**
+
+Pergunta do usuário
+↓
+Tokenização
+↓
+FastEmbed
+↓
+Busca vetorial
+↓
+Top-K = 5
+↓
+Scores
+↓
+Contexto recuperado
+↓
+Prompt aumentado
+↓
+OpenRouter / LLM
+↓
+Resposta
+
+22. **LOGOTIPO E IDENTIDADE VISUAL**
+
+Crie uma identidade visual simples, elegante e discreta.
+
+O logotipo poderá utilizar o nome:
+
+**RAG + Laiane**
+
+Evite uma identidade visual excessivamente complexa.
+
+Priorize aparência profissional, acadêmica e tecnológica.
+
+23. **QUALIDADE E TRATAMENTO DE ERROS**
+
+O sistema deverá tratar adequadamente situações como:
+
+* Supabase indisponível;
+* OpenRouter indisponível;
+* credenciais ausentes;
+* documento inválido;
+* PDF sem texto;
+* falha no OCR;
+* nenhum chunk gerado;
+* erro na geração do embedding;
+* erro no PGVector;
+* nenhum resultado no retrieval;
+* erro do LLM;
+* timeout de serviços externos.
+
+Não esconda erros importantes.
+
+Apresente mensagens claras para o usuário, mas nunca exponha credenciais, tokens ou informações sensíveis.
+
+24. **TESTES**
+
+Após a implementação, execute testes para validar:
+
+* conexão com Supabase;
+* criação das estruturas necessárias;
+* ingestão dos 4 PDFs;
+* OCR/extração;
+* chunking;
+* geração de embeddings;
+* inserção no PGVector;
+* retrieval;
+* retorno do top_k = 5;
+* scores;
+* montagem do prompt aumentado;
+* comunicação com o LLM;
+* resposta final;
+* comportamento quando não existem dados relevantes.
+
+25. **VALIDAÇÃO FINAL**
+
+Antes de considerar o projeto concluído:
+
+* verifique se frontend e backend estão funcionando;
+* verifique se as variáveis do `.env` estão sendo utilizadas corretamente;
+* verifique se nenhuma credencial foi exposta;
+* verifique se os 4 PDFs foram processados;
+* verifique se os vetores foram armazenados no PGVector;
+* verifique se o retrieval retorna até 5 resultados;
+* verifique se os scores são exibidos;
+* verifique se o LLM utiliza o contexto recuperado;
+* verifique o comportamento quando não há candidatos;
+* verifique se a interface apresenta visualmente as etapas do RAG.
+
+26. **EXPLICAÇÃO DIDÁTICA FINAL**
+
+Ao concluir a implementação, apresente um resumo didático explicando:
+
+* o que foi criado;
+* como o documento percorre o pipeline;
+* o que é chunking;
+* o que é embedding;
+* como o FastEmbed participa do processo;
+* como o PGVector armazena e recupera os vetores;
+* o que significa top_k = 5;
+* o que são os scores;
+* como funciona o retrieval;
+* o que é o prompt aumentado;
+* qual é o papel do LLM;
+* como frontend e backend se comunicam;
+* onde estão as credenciais e por que elas não podem ficar no frontend.
+
+**REGRA FUNDAMENTAL:**
+
+O projeto deverá priorizar **clareza didática, rastreabilidade das etapas e funcionamento correto do pipeline RAG**.
+
+Não invente informações, credenciais, resultados de consultas ou documentos.
+
+Quando uma informação necessária não estiver disponível em `rag.txt`, no `.env` ou no próprio ambiente do projeto, informe a ausência em vez de assumir ou inventar um valor.
+
+Não pule etapas do pipeline apenas para simplificar a implementação.
+"""

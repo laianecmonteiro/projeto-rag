@@ -1,0 +1,19 @@
+AMBIENTE:
+Windows 11
+IDE ANTIGRAVITY
+
+VARIAVEIS DE AMBIENTE
+.env
+
+CONEXÕES REMOTAS NO .env
+SUPABASE API
+OPENROUTER API
+
+MODELO DA LLM
+openrouter/router
+
+STACKS
+FRONTEND: Nextjs //evolução do react
+BACKEND: Python
+DATABASE: Supabase
+LLM: openrouter
